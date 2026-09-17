@@ -49,17 +49,28 @@ oradan okur.
 **Alan adı** — `lib/content.ts` içindeki `site.url`. Metadata, sitemap ve robots
 bunu kullanır.
 
-**Demo formu** — talepler varsayılan olarak sunucu günlüğüne yazılır. Gerçek bir
-yere iletmek için:
+**Demo formu** — talepler [Resend](https://resend.com) ile e-posta olarak
+bildirim adresine gönderilir. `.env.local` dosyasına:
 
 ```bash
-# .env.local
-DEMO_WEBHOOK_URL=https://...
+RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
+DEMO_NOTIFY_TO=demo@dentasist.com
+DEMO_NOTIFY_FROM=Dentasist <bildirim@dentasist.com>
 ```
 
-Uç nokta `{ name, clinic, phone, email, size, receivedAt }` gövdesiyle POST alır.
-Farklı bir hedef (e-posta servisi, CRM, veritabanı) istiyorsanız `app/actions.ts`
-içindeki `deliver` fonksiyonunu değiştirin.
+Kurulum sırası:
+
+1. Resend'de hesap açın, **Domains** altına alan adınızı ekleyip DNS kayıtlarını
+   doğrulayın. `DEMO_NOTIFY_FROM` bu alan adından olmalı.
+2. **API Keys**'ten bir anahtar üretip `RESEND_API_KEY` olarak tanımlayın.
+3. `DEMO_NOTIFY_TO` taleplerin düşeceği adres. Birden fazla için virgülle ayırın.
+
+Gelen e-postanın yanıtla adresi talebi bırakan kişiye ayarlıdır; doğrudan
+yanıtlayabilirsiniz.
+
+**Bu üç değişken tanımlı değilse** talep gönderilmez, yalnızca sunucu günlüğüne
+yazılır ve kullanıcı yine de onay ekranını görür. Yayına almadan önce mutlaka
+tanımlayın. Örnek dosya: `.env.example`.
 
 ## Notlar
 

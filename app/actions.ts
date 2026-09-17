@@ -1,6 +1,6 @@
 "use server";
 
-import { site } from "@/lib/content";
+import { sendDemoRequest } from "@/lib/mail";
 
 export type DemoFormState = {
   status: "idle" | "success" | "error";
@@ -22,8 +22,8 @@ function digits(value: string) {
  * Demo talebini sunucuda işler. Server Action olduğu için tarayıcıya hiçbir
  * doğrulama veya gizli anahtar sızmaz; JavaScript kapalıyken de form çalışır.
  *
- * Talebi nereye ileteceğinizi aşağıdaki `deliver` içinde tanımlayın:
- * e-posta servisi, CRM webhook'u ya da veritabanı.
+ * Doğrulanan talep `lib/mail.ts` üzerinden bildirim adresine e-posta olarak
+ * gönderilir.
  */
 export async function submitDemoRequest(
   _prev: DemoFormState,
@@ -48,8 +48,9 @@ export async function submitDemoRequest(
   }
 
   try {
-    await deliver(values);
-  } catch {
+    await sendDemoRequest(values);
+  } catch (cause) {
+    console.error("Demo talebi iletilemedi:", cause);
     return {
       status: "error",
       message: "Talebiniz iletilemedi. Lütfen birazdan tekrar deneyin.",
@@ -57,35 +58,4 @@ export async function submitDemoRequest(
   }
 
   return { status: "success", phone: values.phone };
-}
-
-type DemoRequest = {
-  name: string;
-  clinic: string;
-  phone: string;
-  email: string;
-  size: string;
-};
-
-/**
- * Talebin gideceği yer. `DEMO_WEBHOOK_URL` tanımlıysa oraya POST eder;
- * tanımlı değilse sunucu günlüğüne yazar (geliştirme ve ilk yayın için).
- */
-async function deliver(request: DemoRequest) {
-  const webhook = process.env.DEMO_WEBHOOK_URL;
-
-  if (!webhook) {
-    console.info(`[${site.name}] demo talebi:`, request);
-    return;
-  }
-
-  const response = await fetch(webhook, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ ...request, receivedAt: new Date().toISOString() }),
-  });
-
-  if (!response.ok) {
-    throw new Error(`Webhook ${response.status}`);
-  }
 }
