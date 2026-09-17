@@ -61,7 +61,9 @@ DEMO_NOTIFY_FROM=Dentasist <bildirim@dentasist.com>
 Kurulum sırası:
 
 1. Resend'de hesap açın, **Domains** altına alan adınızı ekleyip DNS kayıtlarını
-   doğrulayın. `DEMO_NOTIFY_FROM` bu alan adından olmalı.
+   doğrulayın. `DEMO_NOTIFY_FROM` bu alan adından olmalı. Denemek için alan adı
+   doğrulamadan `onboarding@resend.dev` de kullanılabilir — ancak bu adres
+   yalnızca Resend hesabının sahibine mail gönderebilir.
 2. **API Keys**'ten bir anahtar üretip `RESEND_API_KEY` olarak tanımlayın.
 3. `DEMO_NOTIFY_TO` taleplerin düşeceği adres. Birden fazla için virgülle ayırın.
 
