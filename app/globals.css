@@ -4,8 +4,13 @@
   --lime-deep: #35a83a;
   --lime-ink: #1e6b25;
 
+  /* marka kiti: mürekkep (#0F2A1A), yeşil metin, zemin */
+  --ink: #0f2a1a;
+  --green-text: #2e9a2e;
+  --ground: #f6f8f4;
+
   /* ürünün kendi koyu yeşili */
-  --forest: #14251f;
+  --forest: #0f2a1a;
   --forest-soft: #2e4b45;
   --teal: #0f766e;
 
@@ -139,20 +144,19 @@ p {
   border-bottom-color: var(--line);
 }
 
-/* Hero yeşilinin üzerindeyken banner beyaz yazar. */
+/* Hero yeşilinin üzerindeyken banner beyaz yazar; marka ise kit gereği
+   mürekkep renginde kalır (beyaz yazı bu yeşilde okunmaz). */
 .nav:not(.scrolled) .brand {
-  color: #fff;
+  color: var(--ink);
+}
+.nav:not(.scrolled) .brand-mark {
+  color: var(--ink);
 }
 .nav:not(.scrolled) .nav-links a {
   color: rgba(255, 255, 255, 0.88);
 }
 .nav:not(.scrolled) .nav-links a:hover {
   color: #fff;
-}
-.nav:not(.scrolled) .brand-mark {
-  background: rgba(255, 255, 255, 0.22);
-  border: 1px solid rgba(255, 255, 255, 0.55);
-  box-shadow: none;
 }
 .nav:not(.scrolled) .nav-cta {
   background: #fff;
@@ -165,29 +169,25 @@ p {
   gap: 28px;
   height: 66px;
 }
+/* Marka kiti: header'da işaret 30 px, yazı 21 px; Onest 600, harf aralığı −3%. */
 .brand {
   display: flex;
   align-items: center;
-  gap: 10px;
-  font-weight: 800;
-  font-size: 1.12rem;
+  gap: 9px;
+  font-family: var(--font-brand), var(--font-sans), sans-serif;
+  font-weight: 600;
+  font-size: 21px;
+  line-height: 1;
   letter-spacing: -0.03em;
-  color: var(--forest);
+  color: var(--ink);
   text-decoration: none;
   flex: none;
 }
 .brand-mark {
   width: 30px;
   height: 30px;
-  border-radius: 9px;
-  display: grid;
-  place-items: center;
-  background: linear-gradient(150deg, var(--lime), var(--lime-deep));
-  color: #fff;
-  font-size: 0.72rem;
-  font-weight: 800;
-  letter-spacing: 0;
-  box-shadow: 0 2px 8px rgba(53, 168, 58, 0.35);
+  flex: none;
+  color: var(--lime);
 }
 .nav-links {
   display: flex;
@@ -807,9 +807,18 @@ p {
 
 /* --------------------------------------------------------------- footer */
 .footer {
-  border-top: 1px solid var(--line);
   padding-block: 44px;
-  background: var(--paper);
+  background: var(--ink);
+  color: #b9c7bc;
+}
+.footer .brand {
+  color: #fff;
+  font-size: 18px;
+}
+.footer .brand-mark {
+  width: 26px;
+  height: 26px;
+  color: var(--lime);
 }
 .foot-in {
   display: flex;
@@ -825,15 +834,15 @@ p {
   font-size: 0.86rem;
 }
 .foot-links a {
-  color: var(--body);
+  color: #b9c7bc;
   text-decoration: none;
 }
 .foot-links a:hover {
-  color: var(--forest);
+  color: #fff;
 }
 .foot-fine {
   font-size: 0.8rem;
-  color: var(--muted);
+  color: #7f918a;
   width: 100%;
   margin-top: 4px;
 }
@@ -883,5 +892,59 @@ p {
   * {
     transition: none !important;
     animation: none !important;
+  }
+}
+
+/* ------------------------------------------------------- marka yükleyiciler */
+/* "Kuyruk işleniyor": satırlar sırayla yanar, güneş sabit. */
+@keyframes loader-glow {
+  0%,
+  100% {
+    opacity: 0.3;
+  }
+  30% {
+    opacity: 1;
+  }
+}
+.loader-queue .row {
+  animation: loader-glow 1.2s ease-in-out infinite;
+}
+/* "Gün doğumu": güneş doğar, satırlar sırayla dolar; 1,8 sn döngü. */
+@keyframes loader-rise-sun {
+  0% {
+    transform: translateY(22px);
+  }
+  45%,
+  100% {
+    transform: translateY(0);
+  }
+}
+@keyframes loader-fill {
+  0%,
+  10% {
+    transform: scaleX(0);
+  }
+  40%,
+  100% {
+    transform: scaleX(1);
+  }
+}
+.loader-rise .sun {
+  animation: loader-rise-sun 1.8s ease-out infinite;
+}
+.loader-rise .row {
+  transform-origin: 6px 0;
+  animation: loader-fill 1.8s ease-out infinite;
+}
+.loader .row-2 {
+  animation-delay: 0.18s;
+}
+.loader .row-3 {
+  animation-delay: 0.36s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .loader .row,
+  .loader .sun {
+    animation: none;
   }
 }

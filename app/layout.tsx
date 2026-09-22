@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Onest, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -9,6 +9,14 @@ const sans = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
+  display: "swap",
+});
+
+// Marka kiti: logo yazısı Onest 600, harf aralığı −3%.
+const brand = Onest({
+  subsets: ["latin", "latin-ext"],
+  weight: ["600"],
+  variable: "--font-brand",
   display: "swap",
 });
 
@@ -52,6 +60,15 @@ export const metadata: Metadata = {
     description: "Hasta kontrolleri ve ödeme sözleri tek panelde, sizin onayınızla.",
   },
   robots: { index: true, follow: true },
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.svg", type: "image/svg+xml" },
+      { url: "/favicon-32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
 };
 
 // Site tek temalı: üstte yeşil hero, altı beyaz. Cihaz koyu moddayken de böyle.
@@ -62,7 +79,7 @@ export const viewport: Viewport = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${sans.variable} ${mono.variable}`}>
+    <html lang="tr" className={`${sans.variable} ${mono.variable} ${brand.variable}`}>
       <body>{children}</body>
     </html>
   );

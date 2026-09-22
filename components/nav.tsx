@@ -2,14 +2,13 @@
 
 import { useEffect, useState } from "react";
 import { nav, site } from "@/lib/content";
+import { LogoMark } from "./logo";
 
 export function Brand() {
   return (
     <a className="brand" href="#top">
-      <span className="brand-mark" aria-hidden="true">
-        Dt
-      </span>
-      {site.name}
+      <LogoMark size={30} className="brand-mark" />
+      <span className="brand-name">{site.name}</span>
     </a>
   );
 }
