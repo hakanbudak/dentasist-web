@@ -1,8 +1,8 @@
 {
-  "name": "dentasist-web",
+  "name": "nirengi-web",
   "version": "0.1.0",
   "private": true,
-  "description": "Dentasist tanıtım sitesi",
+  "description": "Nirengi tanıtım sitesi",
   "scripts": {
     "dev": "next dev",
     "build": "next build",

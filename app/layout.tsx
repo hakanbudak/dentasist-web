@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { JetBrains_Mono, Onest, Plus_Jakarta_Sans } from "next/font/google";
+import { JetBrains_Mono, Plus_Jakarta_Sans } from "next/font/google";
 import { site } from "@/lib/content";
 import "./globals.css";
 
@@ -9,14 +9,6 @@ const sans = Plus_Jakarta_Sans({
   subsets: ["latin", "latin-ext"],
   weight: ["400", "500", "600", "700", "800"],
   variable: "--font-sans",
-  display: "swap",
-});
-
-// Marka kiti: logo yazısı Onest 600, harf aralığı −3%.
-const brand = Onest({
-  subsets: ["latin", "latin-ext"],
-  weight: ["600"],
-  variable: "--font-brand",
   display: "swap",
 });
 
@@ -72,14 +64,15 @@ export const metadata: Metadata = {
 };
 
 // Site tek temalı: üstte yeşil hero, altı beyaz. Cihaz koyu moddayken de böyle.
+// Tema rengi marka kitindeki nirengi yeşili.
 export const viewport: Viewport = {
-  themeColor: "#4BC94B",
+  themeColor: "#1B7A4F",
   colorScheme: "light",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="tr" className={`${sans.variable} ${mono.variable} ${brand.variable}`}>
+    <html lang="tr" className={`${sans.variable} ${mono.variable}`}>
       <body>{children}</body>
     </html>
   );

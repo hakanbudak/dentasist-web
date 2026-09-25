@@ -4,7 +4,7 @@ import { useActionState } from "react";
 import { useFormStatus } from "react-dom";
 import { submitDemoRequest, type DemoFormState } from "@/app/actions";
 import { BigCheck } from "./icons";
-import { LoaderQueue } from "./logo";
+import { LoaderSpin } from "./logo";
 
 const initialState: DemoFormState = { status: "idle" };
 
@@ -14,7 +14,7 @@ function SubmitButton() {
     <button className="btn btn-primary btn-lg" type="submit" disabled={pending}>
       {pending ? (
         <>
-          <LoaderQueue />
+          <LoaderSpin />
           Talep gönderiliyor
         </>
       ) : (

@@ -38,7 +38,7 @@ export function Hero() {
               src="/screens/dashboard.png"
               width={1800}
               height={1125}
-              alt="Dentasist panosu: bugünün hatırlatmaları, gönderim kuyruğu ve geciken ödemeler listesi"
+              alt="Nirengi panosu: bugünün hatırlatmaları, gönderim kuyruğu ve geciken ödemeler listesi"
               sizes="(max-width: 940px) 100vw, 560px"
               priority
             />

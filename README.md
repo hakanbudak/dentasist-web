@@ -1,4 +1,4 @@
-# Dentasist — tanıtım sitesi
+# Nirengi — tanıtım sitesi
 
 Diş klinikleri için hasta hatırlatma ve ödeme takip sisteminin tanıtım sayfası.
 Next.js 15 (App Router) + React 19 + TypeScript.
@@ -54,8 +54,8 @@ bildirim adresine gönderilir. `.env.local` dosyasına:
 
 ```bash
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxx
-DEMO_NOTIFY_TO=demo@dentasist.com
-DEMO_NOTIFY_FROM=Dentasist <bildirim@dentasist.com>
+DEMO_NOTIFY_TO=demo@nirengi.com
+DEMO_NOTIFY_FROM=Nirengi <bildirim@nirengi.com>
 ```
 
 Kurulum sırası:

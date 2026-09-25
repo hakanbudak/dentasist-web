@@ -2,10 +2,12 @@
 // dokunmanıza gerek yok, yalnızca bu dosyayı düzenleyin.
 
 export const site = {
-  name: "Dentasist",
+  name: "Nirengi",
+  /** Logo yazısı: kit gereği her zaman küçük harf. */
+  wordmark: "nirengi",
   tagline: "Diş klinikleri için hasta hatırlatma ve ödeme takip sistemi",
   // Kendi alan adınızla değiştirin: metadata, sitemap ve robots bunu kullanır.
-  url: "https://dentasist.com",
+  url: "https://nirengi.com",
 } as const;
 
 /** Ekran görüntülerinde ve örnek mesajlarda görünen temsili klinik. */
@@ -24,7 +26,7 @@ export const nav = [
 export const hero = {
   title: "Hastanız kontrolü unutmasın, taksidi aksatmasın.",
   lede:
-    "Dentasist, kontrol zamanı gelen ve ödeme sözü olan hastaları her sabah tek listede " +
+    "Nirengi, kontrol zamanı gelen ve ödeme sözü olan hastaları her sabah tek listede " +
     "önünüze getirir. Mesajı okur, gerekirse düzenler, tek tek onaylarsınız. " +
     "Sizin onayınız olmadan hiçbir mesaj gitmez.",
   note: "15 dakikalık canlı demo · kurulum ve hasta aktarımı bize ait",
@@ -55,7 +57,7 @@ export const problem = {
   lede:
     "Altı aylık temizlik, yıllık film, taksit günü, “maaşımı alınca ödeyeceğim” sözü… " +
     "Hepsi farklı yerde tutuluyor ve takibi tek bir kişinin hafızasına kalıyor. " +
-    "Dentasist bu dört takibi tek kuyruğa indirir.",
+    "Nirengi bu dört takibi tek kuyruğa indirir.",
   before: {
     title: "Bugün nasıl yürüyor",
     items: [
@@ -66,7 +68,7 @@ export const problem = {
     ],
   },
   after: {
-    title: "Dentasist ile",
+    title: "Nirengi ile",
     items: [
       "Tarihi gelen her kontrol ve ödeme sabah panoda hazır bekliyor.",
       "Geciken taksitler tutarıyla ve kaç gün geciktiğiyle ayrı listede.",
@@ -171,7 +173,7 @@ export const features: Feature[] = [
     eyebrow: "Verilerinizi çekin",
     title: "Hasta listeniz zaten bir yerde duruyor.",
     body:
-      "Kullandığınız klinik yazılımını bağlayın, hasta listesi Dentasist’e aktarılsın. " +
+      "Kullandığınız klinik yazılımını bağlayın, hasta listesi Nirengi’ye aktarılsın. " +
       "Excel dosyası yükleyebilir, Google Sheets’i salt okunur bağlayabilir ya da " +
       "hastaları elle girebilirsiniz.",
     items: [
@@ -250,5 +252,5 @@ export const cta = {
 } as const;
 
 export const footerNote =
-  "Dentasist · Diş klinikleri için hasta hatırlatma ve ödeme takip sistemi. " +
+  "Nirengi · Diş klinikleri için hasta hatırlatma ve ödeme takip sistemi. " +
   "Ekran görüntülerindeki klinik ve hasta bilgileri temsilidir.";

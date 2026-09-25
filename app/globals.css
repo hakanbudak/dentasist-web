@@ -4,8 +4,9 @@
   --lime-deep: #35a83a;
   --lime-ink: #1e6b25;
 
-  /* marka kiti: mürekkep (#0F2A1A), yeşil metin, zemin */
+  /* marka kiti: site mürekkebi (#0F2A1A), nirengi yeşili (tepe noktası), zemin */
   --ink: #0f2a1a;
+  --brand-green: #1b7a4f;
   --green-text: #2e9a2e;
   --ground: #f6f8f4;
 
@@ -144,13 +145,11 @@ p {
   border-bottom-color: var(--line);
 }
 
-/* Hero yeşilinin üzerindeyken banner beyaz yazar; marka ise kit gereği
-   mürekkep renginde kalır (beyaz yazı bu yeşilde okunmaz). */
+/* Hero yeşilinin üzerindeyken banner beyaz yazar. Kit gereği yeşil zeminde
+   işaretin ve yazının tamamı beyazdır; açık yeşil zeminde yeşil nokta kullanılmaz. */
 .nav:not(.scrolled) .brand {
-  color: var(--ink);
-}
-.nav:not(.scrolled) .brand-mark {
-  color: var(--ink);
+  color: #fff;
+  --logo-tip: #fff;
 }
 .nav:not(.scrolled) .nav-links a {
   color: rgba(255, 255, 255, 0.88);
@@ -169,17 +168,20 @@ p {
   gap: 28px;
   height: 66px;
 }
-/* Marka kiti: header'da işaret 30 px, yazı 21 px; Onest 600, harf aralığı −3%. */
+/* Marka kiti: header'da işaret 30 px, yazı 23 px; Plus Jakarta Sans 700,
+   harf aralığı −3,5%, her zaman küçük harf. Tepe noktası --logo-tip ile gelir. */
 .brand {
   display: flex;
   align-items: center;
-  gap: 9px;
-  font-family: var(--font-brand), var(--font-sans), sans-serif;
-  font-weight: 600;
-  font-size: 21px;
+  gap: 7px;
+  font-family: var(--font-sans), sans-serif;
+  font-weight: 700;
+  font-size: 23px;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.035em;
+  text-transform: lowercase;
   color: var(--ink);
+  --logo-tip: var(--brand-green);
   text-decoration: none;
   flex: none;
 }
@@ -187,7 +189,6 @@ p {
   width: 30px;
   height: 30px;
   flex: none;
-  color: var(--lime);
 }
 .nav-links {
   display: flex;
@@ -811,14 +812,15 @@ p {
   background: var(--ink);
   color: #b9c7bc;
 }
+/* Footer'ın koyu zemininde yazı beyaz, tepe noktası site yeşili (#4BC94B). */
 .footer .brand {
   color: #fff;
-  font-size: 18px;
+  font-size: 20px;
+  --logo-tip: var(--lime);
 }
 .footer .brand-mark {
   width: 26px;
   height: 26px;
-  color: var(--lime);
 }
 .foot-in {
   display: flex;
@@ -896,55 +898,81 @@ p {
 }
 
 /* ------------------------------------------------------- marka yükleyiciler */
-/* "Kuyruk işleniyor": satırlar sırayla yanar, güneş sabit. */
-@keyframes loader-glow {
-  0%,
-  100% {
-    opacity: 0.3;
-  }
-  30% {
-    opacity: 1;
-  }
+/* Üçü de rengini currentColor'dan alır. */
+
+/* "Ağ kuruluyor": noktalar sabit, çizgiler sırayla bağlanır; 2,2 sn döngü. */
+@keyframes loader-edge-1 {
+  0% { stroke-dashoffset: 1; }
+  22%, 85% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 1; }
 }
-.loader-queue .row {
-  animation: loader-glow 1.2s ease-in-out infinite;
+@keyframes loader-edge-2 {
+  0%, 22% { stroke-dashoffset: 1; }
+  44%, 85% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 1; }
 }
-/* "Gün doğumu": güneş doğar, satırlar sırayla dolar; 1,8 sn döngü. */
-@keyframes loader-rise-sun {
-  0% {
-    transform: translateY(22px);
-  }
-  45%,
-  100% {
-    transform: translateY(0);
-  }
+@keyframes loader-edge-3 {
+  0%, 44% { stroke-dashoffset: 1; }
+  66%, 85% { stroke-dashoffset: 0; }
+  100% { stroke-dashoffset: 1; }
 }
-@keyframes loader-fill {
-  0%,
-  10% {
-    transform: scaleX(0);
-  }
-  40%,
-  100% {
-    transform: scaleX(1);
-  }
+.loader-network .edge {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: 2.2s linear infinite;
 }
-.loader-rise .sun {
-  animation: loader-rise-sun 1.8s ease-out infinite;
+.loader-network .edge-1 { animation-name: loader-edge-1; }
+.loader-network .edge-2 { animation-name: loader-edge-2; }
+.loader-network .edge-3 { animation-name: loader-edge-3; }
+
+/* "Sinyal": noktalar klinikten başlayarak sırayla yanar; 1,5 sn döngü. */
+@keyframes loader-dot-1 {
+  0% { opacity: 1; }
+  33%, 90% { opacity: 0.2; }
+  100% { opacity: 1; }
 }
-.loader-rise .row {
-  transform-origin: 6px 0;
-  animation: loader-fill 1.8s ease-out infinite;
+@keyframes loader-dot-2 {
+  0% { opacity: 0.2; }
+  33% { opacity: 1; }
+  66%, 100% { opacity: 0.2; }
 }
-.loader .row-2 {
-  animation-delay: 0.18s;
+@keyframes loader-dot-3 {
+  0%, 33% { opacity: 0.2; }
+  66% { opacity: 1; }
+  100% { opacity: 0.2; }
 }
-.loader .row-3 {
-  animation-delay: 0.36s;
+.loader-signal .frame {
+  opacity: 0.25;
 }
+.loader-signal .dot {
+  animation: 1.5s linear infinite;
+}
+.loader-signal .dot-1 { animation-name: loader-dot-1; }
+.loader-signal .dot-2 { animation-name: loader-dot-2; opacity: 0.2; }
+.loader-signal .dot-3 { animation-name: loader-dot-3; opacity: 0.2; }
+
+/* "Dönen nokta": üç nokta ağırlık merkezinin (32, 37.33) çevresinde döner; 1,1 sn. */
+@keyframes loader-spin {
+  to { transform: rotate(360deg); }
+}
+.loader-spin .spin {
+  transform-origin: 32px 37.33px;
+  transform-box: view-box;
+  animation: loader-spin 1.1s linear infinite;
+}
+
+/* Hareket azaltma: animasyon durur, logo tam hâliyle gösterilir. */
 @media (prefers-reduced-motion: reduce) {
-  .loader .row,
-  .loader .sun {
+  .loader-network .edge,
+  .loader-signal .dot,
+  .loader-spin .spin {
     animation: none;
+  }
+  .loader-network .edge {
+    stroke-dashoffset: 0;
+  }
+  .loader-signal .frame,
+  .loader-signal .dot {
+    opacity: 1;
   }
 }

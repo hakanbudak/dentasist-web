@@ -8,7 +8,7 @@ export function Brand() {
   return (
     <a className="brand" href="#top">
       <LogoMark size={30} className="brand-mark" />
-      <span className="brand-name">{site.name}</span>
+      <span className="brand-name">{site.wordmark}</span>
     </a>
   );
 }
