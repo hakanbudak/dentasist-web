@@ -226,18 +226,148 @@ export const extras = {
   ],
 } as const;
 
+export type PlanFeature = { text: string; soon?: boolean };
+export type Plan = {
+  id: string;
+  name: string;
+  motto: string;
+  monthly: number;
+  yearly: number;
+  patients: number;
+  reminders: number;
+  users: number | "sınırsız";
+  /** Kümülatif liste: bir önceki paketin her şeyi dâhil. */
+  features: PlanFeature[];
+  featured?: boolean;
+  /** trial: 14 gün deneme düğmesi; contact: fiyat görünür, satın alma yok. */
+  cta: "trial" | "contact";
+};
+
 export const pricing = {
   eyebrow: "Fiyatlandırma",
-  title: "Abonelik yok. Yalnızca gönderdiğiniz mesaj kadar.",
+  title: "Kliniğinize göre bir paket. Sözleşme yok.",
   lede:
-    "Panel ve entegrasyonlar ücretsiz. Kontör satın alırsınız, her gönderilen mesaj " +
-    "bir kontör düşer. Kullanmadığınız kontörün süresi dolmaz.",
-  packs: [
-    { tag: "Başlangıç", amount: "500", price: "450 TL", unit: "0,90 TL / mesaj", best: false },
-    { tag: "En çok tercih edilen", amount: "1.500", price: "1.200 TL", unit: "0,80 TL / mesaj", best: true },
-    { tag: "Çok şubeli", amount: "5.000", price: "3.600 TL", unit: "0,72 TL / mesaj", best: false },
+    "Üç paket, tek karar. Yıllık ödemede 2 ay hediye. Fiyatlar KDV hariçtir; " +
+    "14 gün ücretsiz deneme için kredi kartı istemiyoruz.",
+  billing: {
+    monthly: "Aylık",
+    yearly: "Yıllık",
+    yearlyBadge: "2 ay hediye",
+  },
+  value: "Ayda bir hastayı geri kazanmak bu ücreti karşılar.",
+  channels:
+    "SMS ve WhatsApp, her pakette. Hangisini kullanacağınıza siz karar verirsiniz; " +
+    "ikisi de dâhil hatırlatma havuzunuzdan düşer.",
+  plans: [
+    {
+      id: "baslangic",
+      name: "Başlangıç",
+      motto: "Hatırlatmalar kendiliğinden gitsin.",
+      monthly: 399,
+      yearly: 3990,
+      patients: 300,
+      reminders: 300,
+      users: 2,
+      cta: "trial",
+      features: [
+        { text: "Excel / CSV ile hasta aktarımı, önizlemeli" },
+        { text: "Otomatik kontrol hatırlatmaları, hasta bazlı aralık" },
+        { text: "Tedavi planı ve taksit takibi" },
+        { text: "Vade günü ve geciken ödeme hatırlatmaları" },
+        { text: "Ödeme panosu: geciken, bugün vadesi gelen, kalan bakiye" },
+        { text: "Onay kuyruğu: göndermeden önce görüp onaylama" },
+        { text: "Gönderim raporu ve son hareketler" },
+        { text: "Düzenlenebilir mesaj şablonları" },
+        { text: "SMS ve WhatsApp, kanal seçimi sizde" },
+      ],
+    },
+    {
+      id: "standart",
+      name: "Standart",
+      motto: "Kendi kendine çalışsın.",
+      monthly: 799,
+      yearly: 7990,
+      patients: 1000,
+      reminders: 800,
+      users: 5,
+      featured: true,
+      cta: "trial",
+      features: [
+        { text: "Başlangıç'taki her şey" },
+        { text: "Otomatik onay: kuyrukta beklemeden gönderim", soon: true },
+        { text: "Yaklaşan hatırlatmalar: önümüzdeki 7 günün tablosu", soon: true },
+        { text: "“Şimdi hatırlat”: vade gününü beklemeden gönderme", soon: true },
+      ],
+    },
+    {
+      id: "klinik-plus",
+      name: "Klinik+",
+      motto: "Sistemlerinize bağlanır.",
+      monthly: 1599,
+      yearly: 15990,
+      patients: 2500,
+      reminders: 2000,
+      users: "sınırsız",
+      cta: "contact",
+      features: [
+        { text: "Standart'taki her şey" },
+        { text: "W-Lush entegrasyonu: randevu hatırlatmaları", soon: true },
+        { text: "Öncelikli destek, kurulum ve veri taşıma yardımı" },
+        { text: "Çok şube desteği", soon: true },
+      ],
+    },
+  ] satisfies Plan[],
+  overage: {
+    title: "Dâhil hatırlatmanız biterse",
+    lede: "Ek paket alırsınız; bekleyen hatırlatmalar kaybolmaz, paket gelince gönderilir.",
+    packs: [
+      { amount: 500, price: 199 },
+      { amount: 2000, price: 699 },
+      { amount: 5000, price: 1499 },
+    ],
+  },
+  enterprise: {
+    text: "Daha büyük bir kliniğiniz mi var?",
+    link: "Bize ulaşın",
+  },
+  faq: [
+    {
+      q: "Hatırlatmalarım biterse ne olur?",
+      a:
+        "Bekleyen hatırlatmalar gönderilmeden durur, hiçbiri kaybolmaz. Ek paket " +
+        "aldığınızda otomatik olarak kuyruğa geri döner ve gönderilir.",
+    },
+    {
+      q: "Hasta sınırını aşarsam?",
+      a: "Üst pakete geçersiniz, aradaki farkı kalan süre kadar ödersiniz. Kayıtlarınız silinmez.",
+    },
+    {
+      q: "Mesajlarda kliniğimin adı görünür mü?",
+      a: "Evet. Gönderici olarak kliniğinizin adı görünür; hastanız kimden geldiğini bilir.",
+    },
+    {
+      q: "Sözleşme süresi var mı?",
+      a: "Yok. Aylık pakette istediğiniz ay bırakabilirsiniz. Yıllık pakette 2 ay hediye vardır.",
+    },
+    {
+      q: "Hastalarım mesaj almak istemezse?",
+      a:
+        "Hasta kartında SMS almayı kapatabilirsiniz; o hastaya bir daha hatırlatma gitmez. " +
+        "Gelen “iptal” taleplerini de sistem kendisi işler.",
+    },
+    {
+      q: "Mevcut hasta listemi nasıl aktarırım?",
+      a:
+        "Excel veya CSV dosyanızı yüklersiniz. Yüklemeden önce kaç hasta ekleneceğini, kaçının " +
+        "güncelleneceğini ve hangi satırların hatalı olduğunu size gösterir; onaylamadan " +
+        "hiçbir şey yazılmaz.",
+    },
+    {
+      q: "Ücretsiz deneme kredi kartı istiyor mu?",
+      a: "Hayır.",
+    },
   ],
-} as const;
+};
 
 export const cta = {
   title: "Kliniğinizin kuyruğunu birlikte kuralım.",
@@ -246,7 +376,7 @@ export const cta = {
     "ve paneli canlı gösteririz. Kurulum için sizin bir şey yapmanız gerekmez.",
   points: [
     "Hasta listesi aktarımı bizde",
-    "İlk 50 mesaj ücretsiz",
+    "14 gün ücretsiz deneme, kredi kartı yok",
     "Taahhüt yok, istediğinizde bırakırsınız",
   ],
 } as const;

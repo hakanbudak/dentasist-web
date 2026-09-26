@@ -23,10 +23,10 @@ const jsonLd = {
   description: site.tagline,
   url: site.url,
   inLanguage: "tr-TR",
-  offers: pricing.packs.map((pack) => ({
+  offers: pricing.plans.map((plan) => ({
     "@type": "Offer",
-    name: `${pack.amount} kontör`,
-    price: pack.price.replace(/[^\d]/g, ""),
+    name: plan.name,
+    price: plan.monthly,
     priceCurrency: "TRY",
   })),
 };
