@@ -5,6 +5,8 @@ export const site = {
   name: "Nirengi",
   /** Logo yazısı: kit gereği her zaman küçük harf. */
   wordmark: "nirengi",
+  /** Slogan: ismin anlamından gelir (haritacının ölçüme başladığı sabit nokta). */
+  motto: "Kliniğinizin güne başladığı nokta.",
   tagline: "Diş klinikleri için hasta hatırlatma ve ödeme takip sistemi",
   // Kendi alan adınızla değiştirin: metadata, sitemap ve robots bunu kullanır.
   url: "https://nirengi.com",
@@ -42,6 +44,23 @@ export const hero = {
       "Sayın Ayşe Yıldız, diş taşı temizliğinizin üzerinden 6 ay geçti. " +
       "Kontrol randevunuz için bize dönebilirsiniz.",
   },
+} as const;
+
+/** İsmin hikâyesi: hero'nun altındaki kısa bölüm. */
+export const meaning = {
+  eyebrow: "Neden nirengi?",
+  title: "Haritacı ölçüme nirengi noktasından başlar. Kliniğiniz güne Nirengi’den.",
+  body:
+    "Nirengi, haritacıların araziye yerleştirdiği sabit noktadır. Bütün ölçüm ondan " +
+    "başlar, haritanın geri kalanı ona göre çizilir. Klinikte o nokta her sabah açılan " +
+    "panodur: kimin kontrolü geldi, kimin taksiti yaklaştı, kime ne yazılacak, hepsi " +
+    "tek yerde ve sıraya girmiş hâlde.",
+  points: [
+    { label: "Klinik", text: "Tepedeki yeşil nokta. Her şey buradan başlar." },
+    { label: "Hasta", text: "Kontrolü gelen, taksidi yaklaşan, adı listede olan." },
+    { label: "Randevu", text: "Hastanın geri dönüşü; ölçünün kapandığı yer." },
+  ],
+  note: "Aralarındaki çizgiler de onları birbirine bağlayan hatırlatmalar.",
 } as const;
 
 export const stats = [

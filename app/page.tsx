@@ -4,6 +4,7 @@ import { Extras } from "@/components/extras";
 import { Features } from "@/components/features";
 import { Footer } from "@/components/footer";
 import { Hero } from "@/components/hero";
+import { Meaning } from "@/components/meaning";
 import { Nav } from "@/components/nav";
 import { Pricing } from "@/components/pricing";
 import { Problem } from "@/components/problem";
@@ -42,6 +43,7 @@ export default function HomePage() {
       <Nav />
       <main id="top">
         <Hero />
+        <Meaning />
         <Problem />
         <Features />
         <Extras />

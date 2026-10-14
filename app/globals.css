@@ -1092,6 +1092,103 @@ p {
   font-size: 0.9rem;
 }
 
+/* ------------------------------------------------------------ ismin anlamı */
+.meaning-in {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: clamp(32px, 6vw, 80px);
+  align-items: center;
+}
+.meaning-figure {
+  margin: 0;
+  color: var(--ink);
+  background: var(--ground);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  padding: clamp(24px, 4vw, 44px);
+}
+.meaning-figure svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  overflow: visible;
+}
+.meaning-tip {
+  fill: var(--brand-green);
+}
+.meaning-ring {
+  stroke: var(--brand-green);
+  stroke-width: 0.6;
+  stroke-dasharray: 1.6 1.4;
+  opacity: 0.7;
+}
+.meaning-label {
+  font-family: var(--font-sans), sans-serif;
+  font-size: 5px;
+  font-weight: 600;
+  fill: var(--body);
+}
+.meaning-label.strong {
+  fill: var(--brand-green);
+  font-weight: 700;
+}
+.meaning-copy h2 {
+  margin-top: 12px;
+}
+.meaning-body {
+  margin-top: 18px;
+  font-size: 1.04rem;
+}
+.meaning-points {
+  margin: 26px 0 0;
+  display: grid;
+  gap: 12px;
+}
+.meaning-points div {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr);
+  gap: 12px;
+  align-items: baseline;
+  padding-top: 12px;
+  border-top: 1px solid var(--line);
+}
+.meaning-points dt {
+  font-weight: 700;
+  color: var(--forest);
+}
+.meaning-points div:first-child dt {
+  color: var(--brand-green);
+}
+.meaning-points dd {
+  margin: 0;
+  font-size: 0.94rem;
+}
+.meaning-note {
+  margin-top: 18px;
+  font-size: 0.9rem;
+  color: var(--muted);
+}
+@media (max-width: 940px) {
+  .meaning-in {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .meaning-figure {
+    max-width: 420px;
+  }
+}
+
+/* footer sloganı */
+.foot-brand {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.foot-motto {
+  margin: 0;
+  font-size: 0.92rem;
+  color: #c9d6cd;
+}
+
 /* --------------------------------------------------------------- footer */
 .footer {
   padding-block: 44px;
